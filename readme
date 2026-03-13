@@ -1,0 +1,37 @@
+# 📰 Portal de Notícias RAD - Documentação Técnica
+
+Este documento explica o funcionamento do nosso protótipo, estruturado para facilitar o entendimento da equipe e a apresentação acadêmica.
+
+---
+
+## 🏗️ Estrutura do Sistema
+
+O projeto utiliza o modelo **Cliente-Servidor**, onde o Back-end processa os dados e o Front-end os exibe.
+
+### 1. Back-end (`app.py`) - O Cérebro
+Responsável por buscar e organizar as informações reais da internet.
+* **Flask & CORS**: O Flask cria o servidor; o CORS permite que o navegador aceite os dados vindos desse servidor.
+* **Lógica de Datas**: Usa `datetime` para calcular automaticamente se o usuário quer notícias das últimas 24h, semana ou mês.
+* **Consumo de API**: Conecta-se à GNews API para buscar manchetes reais em tempo real.
+* **Limpeza de Dados**: O código filtra o "lixo" da API e entrega apenas: Manchete, Resumo, Link, Fonte e Imagem.
+
+### 2. Front-end (`index.html`) - A Interface
+Responsável pela experiência do usuário.
+* **Filtros**: Menus que enviam as preferências do usuário para o Python.
+* **Fetch API (JavaScript)**: Faz a ponte entre o site e o servidor Python sem precisar atualizar a página.
+* **Design (CSS)**: Organiza as notícias em "Cards" modernos e responsivos.
+* **Segurança de Imagem**: Possui uma trava (`onerror`) que esconde fotos quebradas, mantendo o visual limpo.
+
+---
+
+## 🛠️ Como Executar (Guia para a Equipe)
+
+1. **Instalação das Bibliotecas**:
+   Abra o terminal e digite:
+   `pip install flask flask-cors requests`
+
+2. **Rodar o Servidor**:
+   Execute o comando: `python app.py`
+
+3. **Abrir o Portal**:
+   Dê um clique duplo no arquivo `index.html`.

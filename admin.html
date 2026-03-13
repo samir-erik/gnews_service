@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Admin Noticias</title>
+
+</head>
+
+<body>
+
+<h1>Painel Administrativo</h1>
+
+<div id="stats"></div>
+
+<script>
+
+async function carregar(){
+
+let resp=await fetch("http://127.0.0.1:5000/stats")
+
+let dados=await resp.json()
+
+document.getElementById("stats").innerHTML=`
+
+<p>Total de Noticias: ${dados.total_noticias}</p>
+
+<p>Total de Fontes: ${dados.fontes}</p>
+
+<p>Categorias: ${dados.categorias}</p>
+
+`
+
+}
+
+carregar()
+
+</script>
+
+</body>
+
+</html>

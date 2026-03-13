@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Portal de Noticias</title>
+</head>
+
+<body>
+
+<h1>Portal de Noticias</h1>
+
+<input type="text" id="busca" placeholder="buscar noticia">
+<button onclick="buscar()">Buscar</button>
+
+<div id="noticias"></div>
+
+<h2>Ranking de Fontes</h2>
+
+<ul id="ranking"></ul>
+
+<script>
+
+async function buscar(){
+
+let texto=document.getElementById("busca").value
+
+let resp=await fetch("http://127.0.0.1:5000/get_news?busca="+texto)
+
+let dados=await resp.json()
+
+let div=document.getElementById("noticias")
+
+div.innerHTML=""
+
+dados.forEach(n=>{
+
+div.innerHTML+=`
+
+<div>
+
+<img src="${n.imagem}" width="300">
+
+<h3>${n.manchete}</h3>
+
+<p>${n.resumo}</p>
+
+<p><b>Autor:</b> ${n.autor}</p>
+
+<p><b>Fonte:</b> ${n.fonte}</p>
+
+<a href="${n.link}" target="_blank">Ler</a>
+
+<hr>
+
+</div>
+
+`
+
+})
+
+}
+
+async function ranking(){
+
+let resp=await fetch("http://127.0.0.1:5000/ranking")
+
+let dados=await resp.json()
+
+let ul=document.getElementById("ranking")
+
+ul.innerHTML=""
+
+dados.forEach(r=>{
+
+ul.innerHTML+=`<li>${r.fonte} - ${r.total}</li>`
+
+})
+
+}
+
+buscar()
+
+ranking()
+
+</script>
+
+</body>
+</html>
