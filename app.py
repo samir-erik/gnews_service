@@ -276,14 +276,14 @@ def stats():
 # INICIAR SISTEMA
 # -------------------------
 
-if __name__=="__main__":
+if __name__ == "__main__":
 
     criar_banco()
 
     # coleta noticias ao iniciar
     coletar_noticias()
 
-    bot=threading.Thread(target=iniciar_bot)
+    bot = threading.Thread(target=iniciar_bot)
     bot.start()
 
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
